@@ -1,4 +1,6 @@
 package handlers
 
-// getUserData asd
-func getUserData() {}
+import "net/http"
+
+// getUserData return the cellar
+func getUserData(w http.ResponseWriter, r *http.Request) {}
