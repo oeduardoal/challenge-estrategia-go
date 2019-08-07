@@ -1,3 +1,3 @@
 package controllers
 
-func getUser() {}
+func eaoooooo() {}
