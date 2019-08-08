@@ -112,20 +112,25 @@ func (m *DB) FindRecByQuery(search string) (models.RecListRequest, error) {
 }
 
 // FindRepoByQuery response
-func (m *DB) FindRepoByQuery(search string) {
+func (m *DB) FindRepoByQuery(username string, search string) ([]*models.Repo, error) {
 	collection := client.Database("golang").Collection("users")
 	ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
-	filter := bson.A{bson.M{"$unwind": "$repos"}, bson.M{"$match": bson.M{"repos.tags": bson.M{"$in": bson.A{"jwt"}}}}}
+	// filter := bson.A{bson.M{"$unwind": "$repos"}, bson.M{"$match": bson.M{"repos.tags": bson.M{"$in": bson.A{search}}}}}
+	filter := bson.A{bson.M{"$unwind": "$repos"}, bson.M{"$match": bson.M{"$and": bson.A{bson.M{"repos.tags": bson.M{"$in": bson.A{"top"}}}, bson.M{"username": username}}}}}
 	cur, _ := collection.Aggregate(ctx, filter)
+	var results []*models.Repo
 	for cur.Next(context.TODO()) {
 		var newUser struct {
-			ID       interface{} `json:"id,omitempty" bson:"_id,omitempty"`
-			Username string      `json:"username,omitempty" bson:"username,omitempty"`
+			ID   interface{} `json:"id,omitempty" bson:"_id,omitempty"`
+			Repo models.Repo `json:"repos,omitempty" bson:"repos,omitempty"`
 		}
-		log.Print(newUser)
 		err := cur.Decode(&newUser)
 		if err != nil {
 			log.Fatal(err)
 		}
+		results = append(results, &newUser.Repo)
 	}
+
+	return results, nil
+
 }
