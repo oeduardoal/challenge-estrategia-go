@@ -116,7 +116,7 @@ func (m *DB) FindRepoByQuery(username string, search string) ([]*models.Repo, er
 	collection := client.Database("golang").Collection("users")
 	ctx, _ := context.WithTimeout(context.Background(), 30*time.Second)
 	// filter := bson.A{bson.M{"$unwind": "$repos"}, bson.M{"$match": bson.M{"repos.tags": bson.M{"$in": bson.A{search}}}}}
-	filter := bson.A{bson.M{"$unwind": "$repos"}, bson.M{"$match": bson.M{"$and": bson.A{bson.M{"repos.tags": bson.M{"$in": bson.A{"top"}}}, bson.M{"username": username}}}}}
+	filter := bson.A{bson.M{"$unwind": "$repos"}, bson.M{"$match": bson.M{"$and": bson.A{bson.M{"repos.tags": bson.M{"$in": bson.A{search}}}, bson.M{"username": username}}}}}
 	cur, _ := collection.Aggregate(ctx, filter)
 	var results []*models.Repo
 	for cur.Next(context.TODO()) {
