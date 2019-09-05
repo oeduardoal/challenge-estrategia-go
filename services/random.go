@@ -1,7 +1,7 @@
 package services
 
 import (
-	"challenge-go-react/models"
+	"challenge-estrategia-go/models"
 	"encoding/json"
 
 	"github.com/imroc/req"

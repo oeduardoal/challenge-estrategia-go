@@ -1,4 +1,4 @@
-module challenge-go-react
+module challenge-estrategia-go
 
 go 1.12
 

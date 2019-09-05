@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"challenge-go-react/models"
+	"challenge-estrategia-go/models"
 	"context"
 	"errors"
 	"log"

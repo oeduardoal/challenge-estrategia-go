@@ -1,8 +1,8 @@
 package main
 
 import (
-	"challenge-go-react/handlers"
-	"challenge-go-react/storage"
+	"challenge-estrategia-go/handlers"
+	"challenge-estrategia-go/storage"
 	"net/http"
 
 	"github.com/gorilla/mux"

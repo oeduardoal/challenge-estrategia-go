@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"challenge-go-react/models"
-	"challenge-go-react/services"
-	"challenge-go-react/storage"
+	"challenge-estrategia-go/models"
+	"challenge-estrategia-go/services"
+	"challenge-estrategia-go/storage"
 	"encoding/json"
 	"net/http"
 
